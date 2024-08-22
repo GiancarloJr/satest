@@ -1,49 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import GroupProductService from '#services/group_products_service';
 import { inject } from '@adonisjs/core';
-import type { HttpContext } from '@adonisjs/core/http'
+import BaseController from './base.controller.js';
 
 @inject()
-export default class GroupProductsController {
+export default class GroupProductsController extends BaseController {
 
-  constructor(protected groupService: GroupProductService) { }
-
-  /**
-   * Display a list of resource
-   */
-  async index(_ctx: HttpContext) {
-
-    return this.groupService.all()
-
+  constructor(protected groupService: GroupProductService) {
+    super();
   }
 
-  /**
-   * Display form to create a new record
-   */
-  async create(_ctx: HttpContext) { }
-
-  /**
-   * Handle form submission for the create action
-   */
-  async store({ request }: HttpContext) { }
-
-  /**
-   * Show individual record
-   */
-  async show({ params }: HttpContext) { }
-
-  /**
-   * Edit individual record
-   */
-  async edit({ params }: HttpContext) { }
-
-  /**
-   * Handle form submission for the edit action
-   */
-  async update({ params, request }: HttpContext) { }
-
-  /**
-   * Delete record
-   */
-  async destroy({ params }: HttpContext) { }
 }

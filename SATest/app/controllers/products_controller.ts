@@ -1,38 +1,13 @@
-import type { HttpContext } from '@adonisjs/core/http'
 
-export default class ProductsController {
-  /**
-   * Display a list of resource
-   */
-  async index({}: HttpContext) {}
+import ProductService from '#services/product_service';
+import { inject } from '@adonisjs/core';
+import BaseController from './base.controller.js';
 
-  /**
-   * Display form to create a new record
-   */
-  async create({}: HttpContext) {}
+@inject()
+export default class ProductsController extends BaseController {
 
-  /**
-   * Handle form submission for the create action
-   */
-  async store({ request }: HttpContext) {}
+  constructor(protected productService: ProductService) {
+    super();
+  }
 
-  /**
-   * Show individual record
-   */
-  async show({ params }: HttpContext) {}
-
-  /**
-   * Edit individual record
-   */
-  async edit({ params }: HttpContext) {}
-
-  /**
-   * Handle form submission for the edit action
-   */
-  async update({ params, request }: HttpContext) {}
-
-  /**
-   * Delete record
-   */
-  async destroy({ params }: HttpContext) {}
 }
