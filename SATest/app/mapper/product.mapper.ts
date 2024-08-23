@@ -5,18 +5,20 @@ import { BaseMapper } from "./base.mapper.js";
 export class ProductMapper implements BaseMapper<ProductEntity, ProductModel> {
 
 
-  toModel(entity: ProductEntity): ProductModel {
+  toModel(entity: ProductEntity): ProductModel | undefined {
+    if (!entity) return undefined
     return new ProductModel({
       id: entity.id,
       name: entity.name,
       value: entity.value,
       quantity: entity.quantity,
       createdAt: entity.createdAt,
-      updatedAt: entity.updatedAt,
-
+      updatedAt: entity.updatedAt
     })
   }
-  toEntity(model: ProductModel): ProductEntity {
+  toEntity(model: ProductModel): ProductEntity | undefined {
+    if (!model) return undefined
+
     const entity = new ProductEntity()
 
     entity.id = model.Id
