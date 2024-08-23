@@ -15,11 +15,15 @@ export default class BaseController<T extends BaseModel> {
   /**
    * Handle form submission for the create action
    */
-  async store({ }: HttpContext) { }
+  async store({ }: HttpContext): Promise<T | undefined> {
+    return undefined
+  }
 
   /**
    * Show individual record
    */
-  async show({ }: HttpContext) { }
+  async show({ }: HttpContext): Promise<T | undefined> {
+    return undefined
+  }
 
 }
