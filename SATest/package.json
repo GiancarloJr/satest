@@ -58,7 +58,8 @@
     "@adonisjs/cors": "^2.2.1",
     "@adonisjs/lucid": "^21.1.1",
     "@vinejs/vine": "^2.1.0",
-    "reflect-metadata": "^0.2.2"
+    "reflect-metadata": "^0.2.2",
+    "uuidv4": "^6.2.13"
   },
   "hotHook": {
     "boundaries": [

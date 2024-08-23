@@ -21,7 +21,9 @@ export default class ProductsController extends BaseController<ProductModel> {
     const body = request.body()
     const model = new ProductModel({
       name: body.name,
-      quantity: body.quantity
+      quantity: body.quantity,
+      value: body.value,
+      groupId: body.groupId
     })
     return this.productService.create(model)
   }
@@ -32,7 +34,7 @@ export default class ProductsController extends BaseController<ProductModel> {
     const data = await this.productService.getById(params.id)
 
     if (!data) {
-      throw new HttpNotFoundException('GroupProduct Not Found')
+      throw new HttpNotFoundException('Product Not Found')
     }
 
     return data

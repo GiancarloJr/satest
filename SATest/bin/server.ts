@@ -11,6 +11,14 @@
 
 import 'reflect-metadata'
 import { Ignitor, prettyPrintError } from '@adonisjs/core'
+import app from '@adonisjs/core/services/app'
+import ProductRepository from '../app/repository/products.repository.js'
+import { ProductMapper } from '../app/mapper/product.mapper.js'
+import GroupProductRepository from '../app/repository/group_products.repository.js'
+import { GroupProductMapper } from '../app/mapper/group_product.mapper.js'
+import { State } from './state.js'
+import GroupProductEntity from '../app/entities/groupProduct.entity.js'
+
 
 /**
  * URL to the application root. AdonisJS need it to resolve
@@ -29,16 +37,27 @@ const IMPORTER = (filePath: string) => {
   return import(filePath)
 }
 
+
 new Ignitor(APP_ROOT, { importer: IMPORTER })
-  .tap((app) => {
-    app.booting(async () => {
+  .tap((apphttp) => {
+    apphttp.booting(async () => {
       await import('#start/env')
     })
-    app.listen('SIGTERM', () => app.terminate())
-    app.listenIf(app.managedByPm2, 'SIGINT', () => app.terminate())
+    apphttp.listen('SIGTERM', () => apphttp.terminate())
+    apphttp.listenIf(apphttp.managedByPm2, 'SIGINT', () => apphttp.terminate())
   })
   .httpServer()
   .start()
+  .then(
+    () => {
+      app.container.bind(GroupProductRepository, () => {
+        return new GroupProductRepository(State.getInstance().groupProducts, GroupProductMapper)
+      })
+      app.container.bind(ProductRepository, () => {
+        return new ProductRepository(State.getInstance().products, ProductMapper)
+      })
+    }
+  )
   .catch((error) => {
     process.exitCode = 1
     prettyPrintError(error)
