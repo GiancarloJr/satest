@@ -1,41 +1,25 @@
 /* eslint-disable no-empty-pattern */
 import { HttpContext } from "@adonisjs/core/http";
+import { BaseModel } from "../model/base.model.js";
 
-export default class BaseController {
+
+export default class BaseController<T extends BaseModel> {
 
   /**
    * Display a list of resource
    */
-  async index({ }: HttpContext) { }
-
-  /**
-   * Display form to create a new record
-   */
-  async create({ }: HttpContext) { }
+  async index({ }: HttpContext): Promise<Array<T>> {
+    return []
+  }
 
   /**
    * Handle form submission for the create action
    */
-  async store({ request }: HttpContext) { }
+  async store({ }: HttpContext) { }
 
   /**
    * Show individual record
    */
-  async show({ params }: HttpContext) { }
-
-  /**
-   * Edit individual record
-   */
-  async edit({ params }: HttpContext) { }
-
-  /**
-   * Handle form submission for the edit action
-   */
-  async update({ params, request }: HttpContext) { }
-
-  /**
-   * Delete record
-   */
-  async destroy({ params }: HttpContext) { }
+  async show({ }: HttpContext) { }
 
 }
